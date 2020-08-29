@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Account;
+use App\Models\Currency;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,6 +19,7 @@ class AccountApiTest extends TestCase
     public function test_it_gives_token_on_login()
     {
         $account1 = factory(Account::class)->create(['balance' => 10000]);
+        factory(Currency::class)->create();
         $token = $account1->token;
         $this->assertEquals($token,'');
         $response = $this->call('GET', "api/accounts/$account1->id");

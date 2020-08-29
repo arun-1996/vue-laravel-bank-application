@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Account;
+use App\Models\Currency;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,10 +17,11 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Account::class, function (Faker $faker) {
+$factory->define(Currency::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'balance' => $faker->numberBetween(1000,10000),
-        'currency_id' => 1,
+        'currency' => 'US Dollars',
+        'currency_short' => 'USD',
+        'symbol' => '$',
+        'value_in_usd' => 1,
     ];
 });

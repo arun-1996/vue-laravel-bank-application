@@ -23,5 +23,6 @@ $factory->define(Transaction::class, function (Faker $faker) {
         'to' => $faker->numberBetween(1,10),
         'amount' => $faker->numberBetween(1,1000),
         'details' => $faker->words(5,true),
+        'created_at' => $faker->dateTime(),
     ];
 });

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Account;
+use App\Models\Currency;
 use App\Models\Transaction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -20,6 +21,7 @@ class MakeTransactionApiTest extends TestCase
      */
     public function test_it_makes_transaction_if_token_and_balance_is_valid()
     {
+        factory(Currency::class)->create();
         $account1 = factory(Account::class)->create(['balance' => 10000]);
         $account2 = factory(Account::class)->create(['balance' => 10000]);
         
@@ -29,6 +31,7 @@ class MakeTransactionApiTest extends TestCase
         $token = $response[0]['token'];
         $amount = rand(1,100);
         $payment = [
+            'from' => $account1->id,
             'to' => $account2->id,
             'amount' => $amount,
             'token' => $token
@@ -46,6 +49,7 @@ class MakeTransactionApiTest extends TestCase
      */
     public function test_it_cancels_transaction_if_token_is_incorrect()
     {
+        factory(Currency::class)->create();
         $account1 = factory(Account::class)->create(['balance' => 10000]);
         $account2 = factory(Account::class)->create(['balance' => 10000]);
         
@@ -55,6 +59,7 @@ class MakeTransactionApiTest extends TestCase
         $token = $response[0]['token'];
         $amount = rand(1,100);
         $payment = [
+            'from' => $account1->id,
             'to' => $account2->id,
             'amount' => $amount,
             'token' => $token . 'incorrect' , 
@@ -72,6 +77,7 @@ class MakeTransactionApiTest extends TestCase
      */
     public function test_it_cancels_transaction_if_balance_is_insufficient()
     {
+        factory(Currency::class)->create();
         $account1 = factory(Account::class)->create(['balance' => 10000]);
         $account2 = factory(Account::class)->create(['balance' => 10000]);
         
@@ -81,6 +87,7 @@ class MakeTransactionApiTest extends TestCase
         $token = $response[0]['token'];
         $amount = 10001;
         $payment = [
+            'from' => $account1->id,
             'to' => $account2->id,
             'amount' => $amount,
             'token' => $token . 'incorrect' , 
@@ -98,6 +105,7 @@ class MakeTransactionApiTest extends TestCase
      */
     public function test_it_cancels_transaction_if_token_is_missing()
     {
+        factory(Currency::class)->create();
         $account1 = factory(Account::class)->create(['balance' => 10000]);
         $account2 = factory(Account::class)->create(['balance' => 10000]);
         
@@ -106,6 +114,7 @@ class MakeTransactionApiTest extends TestCase
         $response = $response->json();
         $amount = 10001;
         $payment = [
+            'from' => $account1->id,
             'to' => $account2->id,
             'amount' => $amount,
         ];
