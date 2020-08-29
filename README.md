@@ -16,7 +16,7 @@ A simple banking application using Laravel and VueJs.
 ### Running the project.
 
 1. cd into `/api`
-2. Run `php artisan` serve to start the server.
+2. Run `php artisan serve` to start the server.
 3. cd into `/web`
 4. Run `yarn dev` which builds and serves the Vue web interface. 
 
