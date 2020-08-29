@@ -7,8 +7,8 @@ A simple banking application using Laravel and VueJs.
 ### Initial set up
 
 1. Clone the project.
-2. cd into /api and run composer install.
-3. Create the .env file by providing the necessary database details.
+2. cd into `/api` and `run composer install`
+3. Create the `.env` file by providing the necessary database details.
 4. Run `php artisan key:generate`
 5. Run `php artisan migrate`
 6. Run `php artisan db:seed`
